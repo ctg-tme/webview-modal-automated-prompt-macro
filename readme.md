@@ -2,7 +2,9 @@
 
 ## About
 
-This macro serves as an example on hoe you can open up a WebView Modal on the Cisco Room Navigator.
+This macro serves as an example on how you can open up a WebView Modal on the Cisco Room Navigator.
+
+Great starting point when first working with Webview Display APIs.
 
 ## Features
 - Automatic UI Generation
@@ -20,6 +22,11 @@ This macro serves as an example on hoe you can open up a WebView Modal on the Ci
 - Alter the ```config``` object of the Macro
 - Save the Macro
 - Activate the Macro
+
+## Use Cases
+- Post Meeting Surveys
+- Service Ticket Portal
+- Ordering Coffee 😅
 
 ## Configuration
 

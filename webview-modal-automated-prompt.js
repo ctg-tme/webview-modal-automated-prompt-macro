@@ -27,31 +27,31 @@ or implied.
 import xapi from 'xapi';
 
 const config = {
-  WebModal: { // Set Values pertaining to a Web Based Modal
-    Title: 'Cisco',                     //Set a user facing title for the Web Modal
-    Url: 'https://cisco.com',           // Set the URL you want to open
-    OSDToolTip: {                       // If the modal is prompted by a trigger without user interaction, this tooltip will show to help guide the user
-      Mode: true,
-      Message: 'Tell us about your experience on the Touch Panel 🙂',
-      Duration: 15,
-      Location: 'Top-Right', // Top-Right, Top-Left, Center, Bottom-Right, Bottom-Left
+  WebModal: {
+    Title: 'Cisco',                     // AcceptedValues: String || Description: Set a user facing title for the Web Modal
+    Url: 'https://cisco.com',           // AcceptedValues: String || Description: Set the URL you want to open
+    OSDToolTip: {
+      Mode: true,                       // AcceptedValues: Boolean || Description: Enable or Disable the OSD Message. NOTE: Will only show on non-user initiated sequenced like Call Disconnects
+      Message: 'Tell us about your experience on the Touch Panel 🙂', // AcceptedValues: String || Description: Edit the On Screen OSD Message
+      Duration: 15,                     // AcceptedValues: Integer || Description: Set the Duration of the OSD Message
+      Location: 'Top-Right',            // AcceptedValues: 'Top-Right', 'Top-Left', 'Center', 'Bottom-Right', 'Bottom-Left' || Description: Set the Position of the OSD Message
     },
-    Triggers: { // Choose how the WebModal should be prompted to open
-      PanelClicked: true,               // If true, will generate a user facing panel to open the WebModal when clicked
-      CallDisconnect: true              // If true, the WebModal will open when a call disonnects
+    Triggers: {
+      PanelClicked: true,               // AcceptedValues: Boolean || Description: If true, will generate a user facing panel to open the WebModal when clicked
+      CallDisconnect: true              // AcceptedValues: Boolean || Description: If true, the WebModal will open when a call disconnects
     },
     ClearCacheOnExit: {
-      Mode: false,
-      Target: 'WebApps'                 // All, Signage, WebApps, PersistentWebApp
+      Mode: false,                      // AcceptedValues: Boolean || Description: Have the Webview Cache Clear when Closed. Note: this could disrupt other web based services
+      Target: 'WebApps'                 // AcceptedValues: 'All', 'Signage', 'WebApps', 'PersistentWebApp' || Description: Choose which Cache to Clear
     }
   },
   UserInterface: {
     Panel: {
-      Name: 'WebView on Navigator',     // Set the Name of the Panel
-      Location: 'HomeScreen',           // HomeScreen, HomeScreenAndCallControls, CallControls, Never, ControlPanel
-      Order: 1,                         // Set the Position where this panel will render amongst other Custom Panels. Does not effect Native Panels
+      Name: 'WebView on Navigator',     // AcceptedValues: String || Description: Set the Name of the Panel
+      Location: 'HomeScreen',           // AcceptedValues: 'HomeScreen', 'HomeScreenAndCallControls', 'CallControls', 'Never', 'ControlPanel' || Description: Set the location of the User Interface
+      Order: 1,                         // AcceptedValues: Integer || Set the Position where this panel will render amongst other Custom Panels. Does not effect Native Panels
       Icon: {
-        Type: 'Blinds',                 // Choose an Option from the list Below. Note, Custom expect a the CustomIconURL to be provided
+        Type: 'Blinds',                 // AcceptedValues: Choose an Option from the list Below. Note, Custom expects a the CustomIconURL to be provided
         /*
         "Blinds", "Briefing", "Camera", "Concierge", 
         "Custom", "Disc", "Handset", "Help", "Helpdesk", 
@@ -59,8 +59,8 @@ const config = {
         "Laptop", "Lightbulb", "Media", "Microphone", 
         "Power", "Proximity", "Record", "Sliders", "Tv"
         */
-        Color: 'cf7900',                // Set a Background Color using a Hexadecimal Value. Does not apply to Custom Icons or Icons located in the Control Panel
-        CustomIconURL: 'https://avatars.githubusercontent.com/u/159071680?s=200&v=4' // Must be a .ico, .jpg or .png file that's between 60x60px to 1200x1200px in size. If the image fails to download, the icon above will be used
+        Color: 'cf7900',                // AcceptedValues: String || Set a Background Color using a Hexadecimal Value. Does not apply to Custom Icons or Icons located in the Control Panel
+        CustomIconURL: 'https://avatars.githubusercontent.com/u/159071680?s=200&v=4' // AcceptedValues: String || Must be a .ico, .jpg or .png file that's between 60x60px to 1200x1200px in size. If the image fails to download, the icon above will be used
       }
     }
   }

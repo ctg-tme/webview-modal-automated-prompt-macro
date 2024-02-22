@@ -39,6 +39,10 @@ const config = {
     Triggers: { // Choose how the WebModal should be prompted to open
       PanelClicked: true,               // If true, will generate a user facing panel to open the WebModal when clicked
       CallDisconnect: true              // If true, the WebModal will open when a call disonnects
+    },
+    ClearCacheOnExit: {
+      Mode: false,
+      Target: 'WebApps'                 // All, Signage, WebApps, PersistentWebApp
     }
   },
   UserInterface: {
@@ -137,6 +141,17 @@ const handle = {
       e.Context = 'Failed to open Webview Display on Call Disonnect'
       console.error(e)
     }
+  },
+  WebViewClear: async function (event) {
+    if (event?.Status && event.Status == 'NotVisible') {
+      try {
+        await xapi.Command.WebEngine.DeleteStorage({ Type: config.WebModal.ClearCacheOnExit.Target })
+        console.warn({ Warning: `Webview Storage Deleted, Type: [${config.WebModal.ClearCacheOnExit.Target}]` })
+      } catch (e) {
+        e.Context = 'Failed to delete Storage on Webview Clear'
+        console.error(e)
+      }
+    }
   }
 }
 
@@ -173,6 +188,12 @@ async function init() {
   if (config.WebModal.Triggers.CallDisconnect) {
     xapi.Event.CallDisconnect.on(handle.CallDisconnect)
     console.info({ Info: 'Subscribed to Call Disconnect Event' })
+  }
+
+  if (config.WebModal.ClearCacheOnExit.Mode) {
+    console.warn({ Warning: `ClearCacheOnExit is enabled, this may interfere with Web Based Solutions on the device outside this macro. Consider Disabling` })
+    xapi.Status.UserInterface.WebView['*'].on(handle.WebViewClear)
+    console.info({ Info: 'Subscribed to Webview Cleared Event' })
   }
 
   console.log({ Info: 'Macro Initialized!' })

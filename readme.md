@@ -75,3 +75,8 @@ const config = {
   }
 }
 ```
+
+## FAQ
+
+### Is this Macro Supported by Cisco TAC?
+- No, all Macros are considered Custom Code by Cisco and are not supported.
